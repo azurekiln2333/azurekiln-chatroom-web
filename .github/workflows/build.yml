@@ -1,0 +1,52 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # 单文件产物：dist/index.html 双击即可打开
+      - name: Package
+        run: |
+          NAME=chatroom-web-${GITHUB_REF_NAME//\//-}
+          cp dist/index.html "$NAME.html"
+          (cd dist && zip -r "../$NAME.zip" .)
+          echo "NAME=$NAME" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.NAME }}
+          path: |
+            ${{ env.NAME }}.html
+            ${{ env.NAME }}.zip
+          retention-days: 14
+
+      # 推 v* 标签时发布 Release
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ env.NAME }}.html
+            ${{ env.NAME }}.zip
+          generate_release_notes: true
