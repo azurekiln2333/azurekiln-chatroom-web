@@ -1,0 +1,148 @@
+:root {
+  /* ---- 取自 Telegram（浅色）---- */
+  --primary: #3390ec;
+  --primary-ink: #ffffff;
+  --list-bg: #ffffff;
+  --head-bg: #ffffff;
+  --text: #000000;
+  --text-2: #707579;
+  --text-3: #a2acb4;
+  --line: #dfe1e5;
+  --hover: #f4f4f5;
+  --search-bg: #f4f4f5;
+  --active: #3390ec;
+  --bubble-in: #ffffff;
+  --bubble-out: #e3effd;
+  --time-in: #a0aab0;
+  --time-out: #4f8fd1;
+  --out-accent: #3a86d4;
+  --quote-in: rgba(51, 144, 236, 0.1);
+  --quote-out: rgba(58, 134, 212, 0.12);
+  --composer: #ffffff;
+  --chip-bg: rgba(70, 95, 120, 0.4);
+  --badge: #3390ec;
+  --badge-muted: #c4c9cc;
+  --mark: #ffe58a;
+  --bubble-shadow: none;
+  --radius: 12px; /* 所有圆角矩形统一用这一个值 */
+  --scroll: rgba(0, 0, 0, 0.15);
+  --scroll-hover: rgba(0, 0, 0, 0.28);
+  /* 发言人名字的 7 种固定颜色 */
+  --n0: #cc5049;
+  --n1: #d67722;
+  --n2: #955cdb;
+  --n3: #40a920;
+  --n4: #309eba;
+  --n5: #368ad1;
+  --n6: #c7508b;
+  /* 聊天背景：纯色蓝灰 */
+  --wall: #dbe4ec;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+}
+
+/* ---- Telegram「Night」深蓝 ---- */
+:root[data-theme='dark'] {
+  --primary: #6ab3f3;
+  --primary-ink: #0e1621;
+  --list-bg: #17212b;
+  --head-bg: #17212b;
+  --text: #f5f5f5;
+  --text-2: #7f91a4;
+  --text-3: #6d7f8f;
+  --line: #0e1621;
+  --hover: #202b36;
+  --search-bg: #242f3d;
+  --active: #2b5278;
+  --bubble-in: #182533;
+  --bubble-out: #2b5278;
+  --time-in: #6d7f8f;
+  --time-out: #7da8d3;
+  --out-accent: #8ec3f5;
+  --quote-in: rgba(106, 179, 243, 0.12);
+  --quote-out: rgba(255, 255, 255, 0.1);
+  --composer: #17212b;
+  --chip-bg: rgba(23, 33, 43, 0.75);
+  --badge: #4a8bc8;
+  --badge-muted: #3e546a;
+  --mark: #6b5a10;
+  --bubble-shadow: none;
+  --scroll: rgba(255, 255, 255, 0.15);
+  --scroll-hover: rgba(255, 255, 255, 0.28);
+  --n0: #ff845e;
+  --n1: #fe9f40;
+  --n2: #b18cff;
+  --n3: #7ad85a;
+  --n4: #4dd3c9;
+  --n5: #6ab3f3;
+  --n6: #f48fb8;
+  --wall: #0e1621;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--list-bg);
+  color: var(--text);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* 滚动条：细长胶囊、没有轨道和箭头；只在滚动时出现，停下后隐藏（main.js 加/去 .is-scrolling）。
+   实际宽 10px 方便拖拽，透明边框把可见部分收窄到 4px */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  min-height: 40px;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  background-clip: padding-box;
+  background-color: transparent;
+}
+.is-scrolling::-webkit-scrollbar-thumb {
+  background-color: var(--scroll);
+}
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--scroll-hover);
+}
+/* 只给 Firefox 用标准属性；Chrome/Edge 一旦看到 scrollbar-width 就会忽略上面的自定义样式 */
+@supports (-moz-appearance: none) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll) transparent;
+  }
+}
