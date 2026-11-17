@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+
+# 本地设计方向对比页，不入库
+design-options.html
