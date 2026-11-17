@@ -365,6 +365,10 @@ h2 {
   .resizer {
     display: none;
   }
+  /* 输入条离屏幕底边留 8px，并避开 iPhone 底部手势条 */
+  .chat :deep(.composer) {
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
   .head {
     width: 100%;
     border-radius: 0;
